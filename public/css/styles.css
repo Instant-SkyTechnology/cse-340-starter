@@ -368,6 +368,10 @@ footer ul {
       background-image: url(/images/site/checkerboard.jpg);
       line-height: 1.6;
     }
+
+    h1 {
+      margin-bottom: 70px;
+    }
   
     header,
     main {
