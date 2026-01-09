@@ -20,6 +20,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(staticRoutes)
 
+
 /* **************************
  * View Engine and Templates
  ****************************/
