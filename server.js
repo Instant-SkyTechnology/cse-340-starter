@@ -5,11 +5,20 @@
 /* ***********************
  * Require Statements
  *************************/
+const path = require("path");
 const express = require("express")
 const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
 const app = express()
-const static = require("./routes/static")
+const staticRoutes = require("./routes/static")
+
+/* ***********************
+ * Routes
+ *************************/
+// Serve public folder for CSS, images, JS
+app.use(express.static(path.join(__dirname, "public")));
+
+app.use(staticRoutes)
 
 /* **************************
  * View Engine and Templates
@@ -17,11 +26,6 @@ const static = require("./routes/static")
 app.set("view engine", "ejs")
 app.use(expressLayouts)
 app.set("layout", "./layouts/layout") // not at views root
-
-/* ***********************
- * Routes
- *************************/
-app.use(static)
 
 // Index route
 app.get("/", function(req, res) {
