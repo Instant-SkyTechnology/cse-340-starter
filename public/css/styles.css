@@ -113,7 +113,7 @@ body {
 }
 
 #main-nav ul li.active a {
-  color: black;
+  color: #FFFACD;
 }
 
 #main-nav ul li.active a:hover {
