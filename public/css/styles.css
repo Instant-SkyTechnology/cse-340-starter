@@ -103,6 +103,23 @@ body {
   font-family: 'Courier New', Courier, monospace;
 }
 
+#main-nav ul li a:hover {
+  color: var(--secondary);
+}
+
+.navigation a:hover {
+  background-color: var(--secondary);
+  color: white;
+}
+
+#main-nav ul li.active a {
+  color: black;
+}
+
+#main-nav ul li.active a:hover {
+  color: var(--secondary);
+}
+
 /**************HUMBERGURG*****************/
 .hamburger {
   background: none;
