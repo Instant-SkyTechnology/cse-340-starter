@@ -1,0 +1,17 @@
+{
+    "sqltools.connections": [
+        {
+            "pgOptions": {
+                "ssl": {
+                    "rejectUnauthorized": true
+                }
+            },
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "driver": "PostgreSQL",
+            "connectString": "postgresql://starter_cse_340_user:msgcDOGBj5bfX1eWoJYIhqstScznKOQa@dpg-d5fbip9r0fns73dijbq0-a.virginia-postgres.render.com/starter_cse_340",
+            "name": "project"
+        }
+    ]
+}
