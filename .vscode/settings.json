@@ -10,8 +10,8 @@
             "previewLimit": 50,
             "server": "localhost",
             "driver": "PostgreSQL",
-            "connectString": "postgresql://starter_cse_340_user:msgcDOGBj5bfX1eWoJYIhqstScznKOQa@dpg-d5fbip9r0fns73dijbq0-a.virginia-postgres.render.com/starter_cse_340",
-            "name": "project"
+            "name": "CSE-Ass",
+            "connectString": "postgresql://dbname_vtyn_user:u7ovU3plZWbOlhAkJFQWhASHVnJgaplG@dpg-d5kjmh7gi27c739t7aig-a.virginia-postgres.render.com/dbname_vtyn"
         }
     ]
 }
