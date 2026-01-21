@@ -245,7 +245,7 @@ nav li.active a {
 .namePrice span {
   display: block;
   font-weight: 600;
-  color: var(--secondary);
+  color: var(--primary);
   margin-bottom: 0.5rem;
 }
 
