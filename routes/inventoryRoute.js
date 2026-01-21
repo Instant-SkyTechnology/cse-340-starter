@@ -7,12 +7,11 @@ const invController = require("../controllers/invController")
 router.get("/type/:classificationId", invController.buildByClassificationId);
 router.get("/detail/:invId", invController.buildVehicleDetail);
 
+// Trigger 500 error for testing
 router.get("/trigger-error", (req, res, next) => {
-  try {
-    throw new Error("Intentional Server Error")
-  } catch (error) {
-    next(error)
-  }
+  const err = new Error("Intentional Server Error");
+  err.status = 500;
+  next(err); 
 });
 
 
