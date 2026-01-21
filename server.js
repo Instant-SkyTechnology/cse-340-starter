@@ -39,7 +39,7 @@ app.use("/inv", inventoryRoute)
 
 // 404 handler
 app.use((req, res, next) => {
-  const error = new Error("Page Not Found")
+  const error = new Error("Sorry, we appear to have lost that page.")
   error.status = 404
   next(error)
 })
