@@ -274,7 +274,7 @@ nav li.active a {
 
 .vehicle-info .price {
   font-size: 1.2rem;
-  color: var(--secondary);
+  color: var(--primary);
   margin-bottom: 0.5rem;
 }
 /* ==============================
