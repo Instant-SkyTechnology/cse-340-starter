@@ -68,57 +68,238 @@ body {
   text-decoration: none;
 }
 
+/* ========================================
+   Login page Form & Add Classif/inv Form
+======================================== */
+/* Main container */
+.login-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+/* Heading */
+.login-container h1 {
+  font-family: var(--heading-font);
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+}
+
+/* Form styling */
+.login-form {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  background-color: #f9f9f9;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.login-form label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.login-form input {
+  margin-bottom: 1rem;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.login-form button {
+  background-color: var(--primary);
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+  background-color: var(--primary-light);
+}
+
+/* Registration link */
+.register-link {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  
+}
+
+.register-link a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
 /* ==============================
-   Navigation
+   Register page Form
 ================================ */
 
-/* #main-nav {
-  display: none;
-  flex-direction: column;
-  background-color: var(--primary-light);
+/* Form styling */
+#registration-form {
   width: 100%;
-}
-
-#main-nav.active {
-  display: flex;
-}
-
-#main-nav ul {
+  max-width: 400px;
   display: flex;
   flex-direction: column;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  background-color: #f9f9f9;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-#main-nav li {
-  padding: 0.75rem 1rem;
-  border-top: 1px solid #ffffff33;
-}
-
-#main-nav li a {
-  color: var(--light-bg);
-  text-decoration: none;
+/* Input label styling */
+#registration-form label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  font-size: 1rem;
   display: block;
-  font-weight: 600;
-  font-family: 'Courier New', Courier, monospace;
+  text-align: left;
 }
 
-#main-nav ul li a:hover {
-  color: var(--secondary);
+.password-container {
+  position: relative;
+  margin-bottom: 1rem;
 }
 
-#main-nav li .active a {
-  background-color: #bbb;
+/* Input field styling */
+#registration-form input {
+  margin-bottom: 1rem;
+  padding: 12px;
+  padding-right: 40px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 100%; /* Ensure the input takes up the full width */
+  box-sizing: border-box;
 }
 
-#main-nav ul li.active a {
-  color: #FFFACD;
+/* Focus effect on input fields */
+#registration-form input:focus {
+  border-color: var(--primary);
+  outline: none;
 }
 
-#main-nav ul li.active a:hover {
-  color: var(--secondary);
-} */
+/* Submit button styling */
+#registration-form button {
+  background-color: var(--primary);
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  margin-top: 30px;
+}
+
+#registration-form button:hover {
+  background-color: var(--primary-light);
+}
+
+#registration-form .rq-char {
+  margin-top: -20px;
+}
+
+/* ============================================
+   General Form Styling Add_Class & Add-ivent
+============================================ */
+
+/* Success Message */
+.success {
+  background-color: #e1f5fe;
+  color: #0277bd;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  list-style: none;
+}
+
+/* Link styling (back to management page) */
+.login-form .back-link {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.login-form .back-link a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.login-form label {
+  display: block; /* forces label to its own line */
+  margin-bottom: 0.4rem;
+  font-weight: bold;
+  color: var(--text-dark);
+}
+
+.login-form input,
+.login-form select,
+.login-form textarea {
+  display: block; /* ensures input starts on new line */
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: var(--body-font);
+}
+
+/* ===============================
+   Flash-messages
+================================ */
+/* Flash messages */
+div.messages {
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  font-family: Arial, sans-serif;
+  font-size: 0.95rem;
+}
+
+/* Info messages (mapped from notice) */
+div.messages.info {
+  background-color: #e8f0fe;
+  color: #084298;
+  border-left: 5px solid #0d6efd;
+}
+
+/* Success messages */
+div.messages.success {
+  background-color: #e6f4ea;
+  color: #1e7e34;
+  border-left: 5px solid #198754;
+}
+
+/* Error messages */
+div.messages.error {
+  background-color: #fdecea;
+  color: #842029;
+  border-left: 5px solid #dc3545;
+}
+
+/* Error Validation message styling */
+.notice {
+  color: #b00020;
+  padding: 0.75rem 1rem;
+  margin-top: -60px;
+  border-radius: 4px;
+}
+
+.notice li {
+  margin: 0.25rem 0;
+  font-weight: 500;
+}
 
 /* ==============================
    Navigation and Humbergurg
@@ -289,7 +470,7 @@ main{
 
 h1 {
   color: var(--primary);
-  margin-bottom: 30px;
+  margin-bottom: 60px;
 }
 
 /* ==============================
@@ -582,28 +763,6 @@ footer ul {
       flex: 2;
       order: 2;
     }
-
-    /* #main-nav {
-      display: flex !important;
-      justify-content: center;
-    }
-  
-    #main-nav ul {
-      flex-direction: row;
-    }
-  
-    #main-nav li {
-      border-top: none;
-      border-right: 1px solid #ffffff33;
-    }
-  
-    #main-nav li:last-child {
-      border-left: 1px solid #ffffff33;
-    }
-  
-    .hamburger {
-      display: none;
-    } */
 
     /* ===============================
         Navigation - large

@@ -1,0 +1,77 @@
+<!-- views/account/register.ejs -->
+
+<%- include('../partials/head') %> <!-- Include the head partial -->
+<link rel="stylesheet" href="/css/styles.css" media="screen">
+
+    <body>
+        <div id="wrapper">
+            <%- include('../partials/header') %> <!-- Include the header partial -->
+                <%- include('../partials/navigation') %> <!-- navigation included -->
+                <main>
+                    <h1>
+                        <%= title %>
+                    </h1> <!-- Use the title variable for both the title and h1 -->
+
+                    <% if (errors) { %>
+                        <ul class="notice">
+                            <% errors.array().forEach(error=> { %>
+                                <li>
+                                    <%= error.msg %>
+                                </li>
+                                <% }) %>
+                        </ul>
+                    <% } %>
+
+                    <strong>
+                        <p>All field are required.</p>
+                    </strong>
+                    <!-- Registration form -->
+                    <form action="/account/register" method="POST" id="registration-form">
+                        
+                        <div class="form-group">
+                            <label for="first_name">First Name:</label>
+                            <input type="text" id="first_name" name="account_firstname" placeholder="Enter your first name"
+                                required value="<%= locals.account_firstname %>">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="last_name">Last Name:</label>
+                            <input type="text" id="last_name" name="account_lastname" placeholder="Enter your last name"
+                                required value="<%= locals.account_lastname %>">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="account_email" placeholder="john89@gmail.com" autocomplete="account_email"
+                                required value="<%= locals.account_email %>">
+                        </div>
+
+                        <div class="form-group password-container">
+                            <label for="password">Password:</label>
+                            <input type="password" id="password" name="account_password" placeholder="Enter your password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" placeholder="Minimum 12 charecter">
+                        </div>
+
+                        <div class="rq-char"><i><strong>Password must be minimum 12 charecters and include 1 capital letter, 1 number and 1 special charecter.</strong></i></div>
+
+
+                        <button type="submit">Register</button>
+                    </form>
+            </main>
+
+            <%- include('../partials/footer') %> <!-- Include the footer partial -->
+    </div>
+
+    <script>
+        // Toggle password visibility
+        const passwordInput = document.getElementById('password');
+        const togglePasswordButton = document.getElementById('toggle-password');
+
+        togglePasswordButton.addEventListener('click', () => {
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            togglePasswordButton.textContent = type === 'password' ? 'Show' : 'Hide';
+        });
+    </script>
+</body>
+
+</html>

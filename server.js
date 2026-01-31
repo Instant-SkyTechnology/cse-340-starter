@@ -2,6 +2,7 @@
  * This server.js file is the primary file of the 
  * application. It is used to control the project.
  *************************************************/
+
 /*************************
  * Require Statements
  *************************/
@@ -10,12 +11,57 @@ const path = require("path");
 const express = require("express")
 const expressLayouts = require("express-ejs-layouts")
 const app = express()
+const session = require("express-session")
+const pool = require('./database/')
 
 // Routes & controllers
 const staticRoutes = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute");
 const utilities = require("./utilities/");
+const accountRouter = require("./routes/accountRoute")
+const bodyParser = require("body-parser")
+
+/* ***********************
+ * Middleware
+ * ************************/
+ app.use(session({
+  store: new (require('connect-pg-simple')(session))({
+    createTableIfMissing: true,
+    pool,
+  }),
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  name: 'sessionId',
+}))
+// Express Messages Middleware
+app.use(require('connect-flash')())
+app.use(function (req, res, next) {
+  res.locals.messages = function () {
+    const flash = req.flash(); // get all flash messages
+    let html = '';
+
+    for (const type in flash) {
+      flash[type].forEach(msg => {
+        const cssClass = type === 'notice' ? 'info' : type; //to match "notice" to "info" in my CSS
+        html += `<div class="messages ${cssClass}">${msg}</div>`;
+      });
+    }
+
+    return html;
+  };
+  next();
+});
+
+app.use(async (req, res, next) => {
+  res.locals.nav = await utilities.getNav()
+  next()
+})
+
+// Process Registrations Middleware
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 
 /*************************
@@ -23,6 +69,8 @@ const utilities = require("./utilities/");
  *************************/
 // Serve public folder for CSS, images, JS
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use("/account", accountRouter)
 
 app.use(staticRoutes)
 

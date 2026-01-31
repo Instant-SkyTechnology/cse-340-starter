@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="/css/styles.css" media="screen">
+    <body>
+        <div id="wrapper">
+
+            <main>
+                <h1>
+                    <%= title %>
+                </h1>
+
+                <!-- Display flash messages -->
+                <%- messages() %>
+                
+                    <!-- Display server-side validation errors -->
+                    <% if (errors) { %>
+                        <ul class="notice">
+                            <% errors.array().forEach(error=> { %>
+                                <li>
+                                    <%= error.msg %>
+                                </li>
+                                <% }) %>
+                        </ul>
+                        <% } %>
+
+                <form class="login-form" method="POST" action="/inv/add-classification">
+
+                    <div class="form-group">
+                        <label for="classification_name">Classification Name:</label>
+                        <input type="text" name="classification_name" id="classification_name" value="<%= classification_name %>" required>
+                        <small>Only letters and numbers, no spaces or special characters.</small>
+                    </div>
+
+                    <button type="submit">Add Classification</button>
+                </form>
+            </main>
+
+        </div>
+    </body>
+
+    </html>
