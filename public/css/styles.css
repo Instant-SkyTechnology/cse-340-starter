@@ -78,6 +78,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
   padding: 2rem;
 }
 
@@ -98,6 +99,7 @@ body {
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
 }
 
 .login-form label {
@@ -153,6 +155,7 @@ body {
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
 }
 
 /* Input label styling */
