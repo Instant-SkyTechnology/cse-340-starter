@@ -10,7 +10,6 @@ const env = require("dotenv").config()
 const path = require("path");
 const express = require("express")
 const expressLayouts = require("express-ejs-layouts")
-const app = express()
 const session = require("express-session")
 const pool = require('./database/')
 
@@ -21,6 +20,9 @@ const inventoryRoute = require("./routes/inventoryRoute");
 const utilities = require("./utilities/");
 const accountRouter = require("./routes/accountRoute")
 const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
+
+const app = express()
 
 /* ***********************
  * Middleware
@@ -59,9 +61,13 @@ app.use(async (req, res, next) => {
   next()
 })
 
-// Process Registrations Middleware
+// Process Registrations Middleware w4
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
+// Login activity w5
+app.use(cookieParser())
+app.use(utilities.checkJWTToken)
 
 
 /*************************

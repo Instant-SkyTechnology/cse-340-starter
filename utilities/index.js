@@ -1,4 +1,7 @@
 const invModel = require("../models/inventory-model")
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
+
 const Util = {}
 
 /* **************************************
@@ -130,5 +133,64 @@ Util.buildClassificationList = async function (classification_id = null) {
   return classificationList
 }
 
+/* ****************************************
+* Middleware to check token validity
+**************************************** */
+Util.checkJWTToken = (req, res, next) => {
+  if (req.cookies.jwt) {
+    jwt.verify(
+      req.cookies.jwt,
+      process.env.ACCESS_TOKEN_SECRET,
+      (err, accountData) => {
+        if (err) {
+          req.flash("notice", "Please log in")
+          res.clearCookie("jwt")
+          return res.redirect("/account/login")
+        }
+        res.locals.accountData = accountData
+        res.locals.loggedin = 1
+        next()
+      }
+    )
+  } else {
+    // Ensure accountData is at least null to prevent crashes in EJS
+    res.locals.accountData = null
+    res.locals.loggedin = 0
+    next()
+  }
+}
+
+
+/* ****************************************
+* Middleware to check type validity
+**************************************** */
+Util.checkAccountType = (req, res, next) => {
+  const account = res.locals.accountData
+
+  if (
+    account &&
+    (account.account_type === "Employee" ||
+     account.account_type === "Admin")
+  ) {
+    return next()
+  }
+
+  req.flash("notice", "Please log in with proper permissions.")
+  return res.status(403).render("account/login", {
+    title: "Login",
+  })
+}
+
+/* ****************************************
+ *  Check Login
+ * ************************************ */
+ Util.checkLogin = (req, res, next) => {
+  if (res.locals.loggedin) {
+    next()
+  } else {
+    req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+ }
 
 module.exports = Util

@@ -26,19 +26,50 @@ async function checkExistingEmail(account_email){
   }
 }
 
-/* ***********************************
- *   Get account by email (for login)
- * **********************************/
-async function getAccountByEmail(account_email) {
+/* ****************************************
+* Return account data using email address
+* ****************************************/
+async function getAccountByEmail (account_email) {
   try {
-    const sql = "SELECT * FROM account WHERE account_email = $1"
-    const result = await pool.query(sql, [account_email])
+    const result = await pool.query(
+      'SELECT account_id, account_firstname, account_lastname, account_email, account_type, account_password FROM account WHERE account_email = $1',
+      [account_email])
     return result.rows[0]
   } catch (error) {
-    console.error("getAccountByEmail error:", error)
-    return null
+    return new Error("No matching email found")
   }
 }
 
+/* ****************************************
+ *  Get Account by ID
+ * *************************************** */
+async function getAccountById(account_id) {
+  return (await pool.query(
+    "SELECT * FROM account WHERE account_id = $1",
+    [account_id]
+  )).rows[0]
+}
 
-module.exports = {registerAccount, checkExistingEmail, getAccountByEmail}
+/* ****************************************
+ *  Update Account Info
+ * *************************************** */
+async function updateAccount(account_id, firstname, lastname, email) {
+  return await pool.query(
+    `UPDATE account
+     SET account_firstname=$1, account_lastname=$2, account_email=$3
+     WHERE account_id=$4`,
+    [firstname, lastname, email, account_id]
+  )
+}
+
+/* ****************************************
+ *  Update Account Password
+ * *************************************** */
+async function updatePassword(account_id, password) {
+  return await pool.query(
+    "UPDATE account SET account_password=$1 WHERE account_id=$2",
+    [password, account_id]
+  )
+}
+
+module.exports = {registerAccount, checkExistingEmail, getAccountByEmail, getAccountById, updateAccount, updatePassword}

@@ -145,6 +145,14 @@ body {
    Register page Form
 ================================ */
 
+/* Disabled button styling */
+#updateBtn:disabled,
+.login-form button:disabled {
+  background-color: #999; /* gray to indicate disabled */
+  cursor: not-allowed; /* changes mouse pointer */
+  opacity: 0.6; /* semi-transparent */
+}
+
 /* Form styling */
 #registration-form {
   width: 100%;
@@ -261,6 +269,7 @@ body {
 /* ===============================
    Flash-messages
 ================================ */
+.ssss {margin-bottom: 20px;}
 /* Flash messages */
 div.messages {
   padding: 12px 16px;
@@ -468,12 +477,12 @@ nav li.active a {
 main{
   padding: 1rem;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: auto;
 }
 
 h1 {
   color: var(--primary);
-  margin-bottom: 60px;
+  margin-bottom: -20px;
 }
 
 /* ==============================
@@ -709,7 +718,7 @@ footer ul {
     }
 
     h1 {
-      margin-bottom: 70px;
+      margin-bottom: 50px;
     }
   
     header,

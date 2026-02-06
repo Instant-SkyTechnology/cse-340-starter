@@ -1,0 +1,58 @@
+<link rel="stylesheet" href="/css/styles.css" media="screen">
+
+<body>
+    <div id="wrapper">
+
+        <main>
+            <h1>
+                <%= title %>
+            </h1>
+        
+            <%- messages() %>
+        
+                <p class="notice">
+                    <strong>Confirm Deletion – This delete is permanent.</strong>
+                </p>
+        
+                <form class="login-form" action="/inv/delete" method="post">
+        
+                    <!-- Hidden Inventory ID -->
+                    <input type="hidden" name="inv_id" <% if (locals.inv_id) { %>
+                    value="<%= locals.inv_id %>" <% } %>>
+        
+                            <div class="form-group">
+                                <label for="inv_make">Make:</label>
+                                <input type="text" id="inv_make" readonly<% if (locals.inv_make) { %>
+                                value="<%= locals.inv_make %>" <% } %>>
+                            </div>
+        
+                            <div class="form-group">
+                                <label for="inv_model">Model:</label>
+                                <input type="text" id="inv_model" readonly<% if (locals.inv_model) { %>
+                                value="<%= locals.inv_model %>" <% } %>>
+                            </div>
+        
+                            <div class="form-group">
+                                <label for="inv_year">Year:</label>
+                                <input type="text" id="inv_year" readonly<% if (locals.inv_year) { %>
+                                value="<%= locals.inv_year %>" <% } %>>
+                            </div>
+        
+                            <div class="form-group">
+                                <label for="inv_price">Price:</label>
+                                <input type="text" id="inv_price" readonly<% if (locals.inv_price) { %>
+                                value="$<%= locals.inv_price %>" <% } %>>
+                            </div>
+        
+                            <button type="submit">Delete</button>
+        
+                </form>
+        </main>
+
+
+    </div>
+
+    <script src="/js/inv-update.js"></script>
+</body>
+
+</html>
