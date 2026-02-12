@@ -79,4 +79,33 @@ validate.checkInventoryData = async (req, res, next) => {
   next()
 }
 
+/* *********************************
+ * Validate classification deletion w6
+ * ****************************** */
+validate.validateDeleteClassification = async (req, res, next) => {
+  try {
+    const { classification_id } = req.body
+
+    if (!classification_id || isNaN(classification_id)) {
+      req.flash("notice", "Invalid classification selection.")
+      return res.redirect("/inv/")
+    }
+
+    const vehicles =
+      await invModel.getVehiclesByClassificationId(classification_id)
+
+    if (vehicles.rowCount > 0) {
+      req.flash(
+        "notice",
+        "Cannot delete classification. Vehicles exist in this classification."
+      )
+      return res.redirect("/inv/")
+    }
+
+    next()
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = validate

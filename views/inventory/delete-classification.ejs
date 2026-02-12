@@ -1,0 +1,26 @@
+
+<!-- Final Enhancement w6 -->
+
+    <h1>
+        <%= title %>
+    </h1>
+
+    <p class="ssskkka">
+        <strong>Warning:</strong> This action cannot be undone.
+    </p>
+
+    <p>
+        Are you sure you want to delete the classification
+        "<strong>
+            <%= classification.classification_name %>
+        </strong>"?
+    </p>
+
+    <form method="post" action="/inv/delete-classification" class="login-form">
+        <input type="hidden" name="classification_id" value="<%= classification.classification_id %>">
+
+        <button type="submit">Delete Classification</button>
+        <a href="/inv/">Cancel</a>
+    </form>
+
+   

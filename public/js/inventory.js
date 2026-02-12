@@ -45,3 +45,27 @@ function buildInventoryList(data) {
  // Display the contents in the Inventory Management view 
  inventoryDisplay.innerHTML = dataTable; 
 }
+
+// For deleting the Classification (Admin Only) w6
+const deleteBtn = document.querySelector("#deleteClassificationBtn")
+const classificationSelect = document.querySelector("#classificationList")
+
+if (deleteBtn && classificationSelect) {
+  deleteBtn.addEventListener("click", () => {
+    const classificationId = classificationSelect.value
+
+    if (!classificationId) {
+      alert("Please select a classification first.")
+      return
+    }
+
+    const confirmDelete = confirm(
+      "Are you sure you want to delete this classification?"
+    )
+
+    if (confirmDelete) {
+      window.location.href = `/inv/delete-classification/${classificationId}`
+
+    }
+  })
+}

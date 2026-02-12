@@ -7,11 +7,7 @@
             <!-- Display flash messages -->
             <%- messages() %>
 
-            <% if (message && message.length> 0) { %>
-                <div class="notice">
-                    <%= message[0] %>
-                </div>
-                <% } %>
+           
 
 
                 <ul>
@@ -24,6 +20,15 @@
                 <div class="ssss">
                     <%- classificationSelect %>
                 </div>
+
+                <% if (locals.accountData && locals.accountData.account_type==="Admin" ) { %>
+                    <div class="admin-actions">
+                        <button id="deleteClassificationBtn" type="button">
+                            Delete Selected Classification
+                        </button>
+                    </div>
+                    <% } %>
+
 
 
                 <table id="inventoryDisplay"></table>

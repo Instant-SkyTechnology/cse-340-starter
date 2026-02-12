@@ -181,6 +181,22 @@ Util.checkAccountType = (req, res, next) => {
   })
 }
 
+/* *********************************
+ * Admin authorization middleware w6
+ * ***************************** */
+Util.checkAdmin = (req, res, next) => {
+  if (
+    res.locals.accountData &&
+    res.locals.accountData.account_type === "Admin"
+  ) {
+    return next()
+  }
+
+  req.flash("notice", "Admin access required.")
+  return res.redirect("/account/login")
+}
+
+
 /* ****************************************
  *  Check Login
  * ************************************ */

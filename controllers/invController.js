@@ -426,6 +426,52 @@ invCont.deleteInventory = async function (req, res, next) {
   }
 }
 
+/* *************************************************
+ * Build delete classification confirmation view w6
+ * ************************************************/
+ invCont.buildDeleteClassification = async function (req, res, next) {
+  try {
+    const classification_id = req.params.classificationId
+    const classification = await invModel.getClassificationById(classification_id)
+
+    if (!classification) {
+      req.flash("notice", "Classification not found.")
+      return res.redirect("/inv/")
+    }
+
+    res.render("inventory/delete-classification", {
+      title: "Delete Classification",
+      classification,
+      errors: null,
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
+/* **********************************
+ * Process classification deletion w6
+ * ******************************** */
+invCont.deleteClassification = async function (req, res, next) {
+  try {
+    const { classification_id } = req.body
+    const result = await invModel.deleteClassificationById(classification_id)
+
+    if (result.rowCount === 1) {
+      req.flash("notice", `Classification deleted successfully.`)
+    } else {
+      req.flash("notice", `Classification could not be deleted.`)
+    }
+
+    res.redirect("/inv/")
+  } catch (error) {
+    req.flash(
+      "notice",
+      "Deletion failed. The classification may be in use."
+    )
+    res.redirect("/inv/")
+  }
+}
 
 
 

@@ -153,6 +153,49 @@ async function deleteInventoryItem(inv_id) {
   }
 }
 
+/* *****************************
+ * Get classification by ID
+ * ***************************** */
+async function getClassificationById(classification_id) {
+  try {
+    const sql = `
+      SELECT classification_id, classification_name
+      FROM classification
+      WHERE classification_id = $1
+    `
+    const data = await pool.query(sql, [classification_id])
+    return data.rows[0]
+  } catch (error) {
+    throw error
+  }
+}
+
+/* ********************************
+ * Delete classification by ID w6
+ * ***************************** */
+async function deleteClassificationById(classification_id) {
+  try {
+    const sql = `
+      DELETE FROM classification
+      WHERE classification_id = $1
+    `
+    return await pool.query(sql, [classification_id])
+  } catch (error) {
+    throw error
+  }
+}
+
+// Get classification Id
+async function getVehiclesByClassificationId(classification_id) {
+  const sql = `
+    SELECT inv_id
+    FROM inventory
+    WHERE classification_id = $1
+  `
+  return await pool.query(sql, [classification_id])
+}
+
+
 
 module.exports = {
   getClassifications,
@@ -162,5 +205,8 @@ module.exports = {
   addInventoryItem,
   getLatestInventory,
   updateInventory,
-  deleteInventoryItem
+  deleteInventoryItem,
+  getClassificationById,
+  deleteClassificationById,
+  getVehiclesByClassificationId
 };

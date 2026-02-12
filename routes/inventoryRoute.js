@@ -154,13 +154,44 @@ router.post(
 /* ***********************************
  *  AJAX & Edit/Delete Inventory Routes
  * ***********************************/
-router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+router.get("/getInventory/:classification_id",
+            utilities.handleErrors(invController.getInventoryJSON))
 
-router.get("/edit/:inv_id", utilities.checkJWTToken, utilities.checkAccountType, utilities.handleErrors(invController.editInventoryView))
-router.post("/update", utilities.checkJWTToken, utilities.checkAccountType, utilities.handleErrors(invController.updateInventory))
+router.get("/edit/:inv_id",
+            utilities.checkJWTToken,
+            utilities.checkAccountType,
+            utilities.handleErrors(invController.editInventoryView))
+router.post("/update",
+            utilities.checkJWTToken,
+            utilities.checkAccountType,
+            utilities.handleErrors(invController.updateInventory))
 
-router.get("/delete/:inv_id", utilities.checkJWTToken, utilities.checkAccountType, utilities.handleErrors(invController.buildDeleteConfirm))
-router.post("/delete", utilities.checkJWTToken, utilities.checkAccountType, utilities.handleErrors(invController.deleteInventory))
+router.get("/delete/:inv_id",
+            utilities.checkJWTToken,
+            utilities.checkAccountType,
+            utilities.handleErrors(invController.buildDeleteConfirm))
+router.post("/delete",
+            utilities.checkJWTToken,
+            utilities.checkAccountType,
+            utilities.handleErrors(invController.deleteInventory))
+
+/* *****************************
+ * Admin-only delete routes w6
+ * ***************************** */
+router.get(
+  "/delete-classification/:classificationId",
+  utilities.checkLogin,
+  utilities.checkAdmin,
+  utilities.handleErrors(invController.buildDeleteClassification)
+)
+
+router.post(
+  "/delete-classification",
+  utilities.checkLogin,
+  utilities.checkAdmin,
+  invValidation.validateDeleteClassification,
+  utilities.handleErrors(invController.deleteClassification)
+)
 
 /* ****************************
  *  Public Routes (no auth)
